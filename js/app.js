@@ -57,6 +57,7 @@ function dropdownCountriesList(countries) {
 
 function regionFilterDropdownHandler(e) {
 	const cards = document.querySelector('.cards');
+	inputSearch.value = '';
 	cards.remove();
 	const regionName = e.target.value;
 	optionOne.remove();
