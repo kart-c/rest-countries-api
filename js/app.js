@@ -164,3 +164,35 @@ function cardTitleClickHandler(e) {
 
 cardTitle = Array.from(cardTitles);
 cardTitle.map((card) => card.addEventListener('click', cardTitleClickHandler));
+
+//
+//
+//
+//
+//
+
+function fetchSearchQuery(searchQuery) {
+	url = fetch(`https://restcountries.eu/rest/v2/name/${searchQuery}`)
+		.then((response) => response.json())
+		.then((data) => searchQueryData(data))
+		.catch((e) => console.log(e));
+}
+
+function searchQueryData(countries) {
+	console.log(countries);
+	const cards = document.createElement('section');
+	main.append(cards);
+	cards.classList.add('cards');
+	countries.map((country) => {
+		newRenderedList(cards, country);
+	});
+}
+
+function inputSearchHandler(e) {
+	const cards = document.querySelector('.cards');
+	cards.remove();
+	const searchQuery = e.target.value;
+	fetchSearchQuery(searchQuery);
+}
+
+inputSearch.addEventListener('change', inputSearchHandler);
