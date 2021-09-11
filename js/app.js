@@ -1,6 +1,5 @@
 const regionFilter = document.querySelector('#region-filter');
 const optionOne = document.querySelector('.option-one');
-const cards = document.querySelector('.cards');
 const main = document.querySelector('main');
 
 function fetchRegionCountries(region) {
@@ -48,6 +47,7 @@ function regionFilterCountries(countries) {
 }
 
 function regionFilterDropdownHandler(e) {
+	const cards = document.querySelector('.cards');
 	cards.remove();
 	const regionName = e.target.value;
 	optionOne.remove();
