@@ -35,6 +35,11 @@ body {
 	font-weight: 800;
 }
 
+.main-header h1 a {
+	text-decoration: none;
+	color: inherit;
+}
+
 #toggle-dark-mode {
 	display: inline;
 	cursor: pointer;
