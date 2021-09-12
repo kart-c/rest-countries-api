@@ -16,6 +16,7 @@ function fetchDropdownCountries(region) {
 function newRenderedList(cards, country) {
 	const card = document.createElement('div');
 	card.classList.add('card');
+	card.setAttribute('id', country.alpha3Code);
 	cards.append(card);
 	const imageContainer = document.createElement('div');
 	imageContainer.classList.add('card-image');
@@ -65,12 +66,6 @@ function regionFilterDropdownHandler(e) {
 }
 
 regionFilter.addEventListener('change', regionFilterDropdownHandler);
-
-//
-//
-//
-//
-//
 
 function backBtnClickHandler() {
 	const cards = document.querySelector('.cards');
@@ -194,12 +189,6 @@ function cardTitleClickHandler(e) {
 
 cardTitle = Array.from(cardTitles);
 cardTitle.map((card) => card.addEventListener('click', cardTitleClickHandler));
-
-//
-//
-//
-//
-//
 
 function fetchSearchQuery(searchQuery) {
 	url = fetch(`https://restcountries.eu/rest/v2/name/${searchQuery}`)
