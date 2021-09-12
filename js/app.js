@@ -86,6 +86,8 @@ function backBtnClickHandler() {
 backBtn.addEventListener('click', backBtnClickHandler);
 
 function fetchCountryInfo(name) {
+	const container = document.querySelector('.country-info__container');
+	container ? container.remove() : null;
 	url = fetch(`https://restcountries.eu/rest/v2/name/${name}?fullText=true`)
 		.then((response) => response.json())
 		.then((data) => countryInfo(data[0]))
@@ -93,7 +95,6 @@ function fetchCountryInfo(name) {
 }
 
 function countryInfo(data) {
-	console.log(data);
 	const container = document.createElement('div');
 	container.classList.add('country-info__container');
 	main.append(container);
@@ -150,6 +151,34 @@ function countryInfo(data) {
 	countryCapital.classList.add('card-info');
 	countryCapital.innerHTML = `Capital: <span>${data.capital}</span>`;
 	infoDiv.append(countryCapital);
+	data.borders.length !== 0 ? borderCountries(data, infoDiv) : '';
+}
+
+function borderCountries(data, infoDiv) {
+	const border = document.createElement('p');
+	border.innerText = 'Border Countries: ';
+	infoDiv.append(border);
+	border.classList.add('card-info');
+	const borderCountriesBtnContainer = document.createElement('div');
+	borderCountriesBtnContainer.classList.add('border-countries__btn-container');
+	border.insertAdjacentElement('beforeend', borderCountriesBtnContainer);
+	data.borders.map((border) => {
+		const borderCountriesBtn = document.createElement('button');
+		borderCountriesBtn.classList.add('border-countries__btn');
+		url = fetch(`https://restcountries.eu/rest/v2/alpha/${border}`)
+			.then((response) => response.json())
+			.then((data) => {
+				borderCountriesBtn.innerText = data.name;
+				borderCountriesBtnContainer.append(borderCountriesBtn);
+				borderCountriesBtn.addEventListener('click', borderBtnClickHandler);
+			})
+			.catch((e) => console.log(e));
+	});
+}
+
+function borderBtnClickHandler(e) {
+	const borderCountry = e.target.innerText;
+	fetchCountryInfo(borderCountry);
 }
 
 function cardTitleClickHandler(e) {

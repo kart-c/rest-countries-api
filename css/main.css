@@ -206,14 +206,32 @@ body {
 	padding-left: 5rem;
 }
 
+.info-outer-div h2 {
+	margin-top: 0;
+}
+
 .info-div {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: repeat(5, 2rem);
-	align-items: center;
+	align-items: baseline;
 	grid-gap: 0.6rem 2rem;
 }
 
 .info-div p:last-child {
-	grid-column: 1;
+	grid-column: -3/-1;
+}
+
+.border-countries__btn-container {
+	display: inline;
+}
+
+.border-countries__btn {
+	border: 0;
+	padding: 0.5rem 1rem;
+	margin: 0.5rem;
+	background-color: var(--dark-mode__secondary);
+	color: var(--light-mode__secondary);
+	cursor: pointer;
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
