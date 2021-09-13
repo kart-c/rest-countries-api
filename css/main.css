@@ -29,10 +29,20 @@ body {
 	align-items: center;
 	justify-content: space-between;
 }
+@media (max-width: 31.5rem) {
+	.main-header {
+		padding: 0.5rem;
+	}
+}
 
 .main-header h1 {
 	margin: 0;
 	font-weight: 800;
+}
+@media (max-width: 31.5rem) {
+	.main-header h1 {
+		font-size: 1.5rem;
+	}
 }
 
 .main-header h1 a {
@@ -45,11 +55,22 @@ body {
 	cursor: pointer;
 	margin-right: 1.5rem;
 }
+@media (max-width: 31.5rem) {
+	#toggle-dark-mode {
+		font-size: 0.8rem;
+		margin-right: 0.5rem;
+	}
+}
 
 .selection {
 	display: flex;
 	justify-content: space-between;
 	padding: 2.5rem 2.5rem 0;
+}
+@media (max-width: 41rem) {
+	.selection {
+		flex-direction: column;
+	}
 }
 
 .search-container {
@@ -75,6 +96,11 @@ body {
 	font-weight: 300;
 	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
+@media (max-width: 41rem) {
+	#search {
+		max-width: 60vw;
+	}
+}
 
 #search::placeholder {
 	color: var(--light-mode__secondary);
@@ -98,6 +124,12 @@ body {
 	color: var(--light-mode__secondary);
 	border: 0;
 	outline: 0;
+}
+@media (max-width: 41rem) {
+	#region-filter {
+		height: 2.6rem;
+		margin-top: 1rem;
+	}
 }
 
 #region-filter:focus-visible {
@@ -160,6 +192,7 @@ body {
 
 .card-info {
 	font-weight: 600;
+	margin: 0;
 }
 
 .card-info span {
@@ -196,14 +229,37 @@ body {
 .country-info__container {
 	display: flex;
 	padding: 2rem;
+	align-items: flex-start;
+}
+@media (max-width: 54rem) {
+	.country-info__container {
+		flex-direction: column;
+		padding: 3rem;
+	}
 }
 
 .country-info__flag {
-	max-width: 35rem;
+	width: 35rem;
+}
+@media (max-width: 54rem) {
+	.country-info__flag {
+		width: 100%;
+	}
 }
 
 .country-info__info-container {
 	padding-left: 5rem;
+}
+@media (max-width: 64rem) {
+	.country-info__info-container {
+		padding-left: 2rem;
+	}
+}
+@media (max-width: 54rem) {
+	.country-info__info-container {
+		margin-top: 2rem;
+		padding: 0;
+	}
 }
 
 .info-outer-div h2 {
@@ -213,9 +269,18 @@ body {
 .info-div {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: repeat(5, 2rem);
+	grid-template-rows: auto;
 	align-items: baseline;
-	grid-gap: 0.6rem 2rem;
+	grid-gap: 1rem 2rem;
+}
+@media (max-width: 31.5rem) {
+	.info-div {
+		grid-template-columns: 1fr;
+		grid-gap: 1.5rem 0;
+	}
+	.info-div p {
+		grid-column: 1;
+	}
 }
 
 .info-div p:last-child {
@@ -224,6 +289,12 @@ body {
 
 .border-countries__btn-container {
 	display: inline;
+}
+@media (max-width: 31.5rem) {
+	.border-countries__btn-container {
+		display: block;
+		margin-top: 1rem;
+	}
 }
 
 .border-countries__btn {
