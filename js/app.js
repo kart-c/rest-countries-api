@@ -15,7 +15,7 @@ function fetchDropdownCountries(region) {
 
 function newRenderedList(cards, country) {
 	const card = document.createElement('div');
-	card.classList.add('card');
+	card.classList.add('card', 'dark-mode__secondary');
 	card.setAttribute('id', country.alpha3Code);
 	cards.append(card);
 	const imageContainer = document.createElement('div');

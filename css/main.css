@@ -10,20 +10,25 @@
 	--primary-font: 'Nunito Sans', sans-serif;
 }
 
+.dark-mode__secondary {
+	background-color: var(--dark-mode__secondary);
+	color: var(--light-mode__secondary);
+}
+
 body {
 	margin: 0;
+	background-color: var(--dark-mode__primary);
+	color: var(--light-mode__secondary);
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
 	font-family: var(--primary-font);
 	font-weight: 600;
-	background-color: var(--dark-mode__primary);
-	color: var(--light-mode__secondary);
+
 	box-sizing: border-box;
 }
 
 .main-header {
-	background-color: var(--dark-mode__secondary);
 	padding: 1rem;
 	display: flex;
 	align-items: center;
@@ -87,9 +92,7 @@ body {
 	width: 20rem;
 	height: 2.5rem;
 	border-radius: 5px;
-	background-color: var(--dark-mode__secondary);
 	border: none;
-	color: var(--light-mode__secondary);
 	font-size: 1rem;
 	padding-left: 3rem;
 	font-family: var(--primary-font);
@@ -120,8 +123,6 @@ body {
 	font-family: var(--primary-font);
 	font-weight: 300;
 	padding-left: 0.5rem;
-	background-color: var(--dark-mode__secondary);
-	color: var(--light-mode__secondary);
 	border: 0;
 	outline: 0;
 }
@@ -142,8 +143,6 @@ body {
 	cursor: pointer;
 	border: 0;
 	margin-left: 2.5rem;
-	background-color: var(--dark-mode__secondary);
-	color: var(--light-mode__secondary);
 	box-shadow: 3px 3px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
@@ -163,7 +162,6 @@ body {
 
 .card {
 	display: inline-block;
-	background-color: var(--dark-mode__secondary);
 	height: 25rem;
 	width: 17rem;
 	box-shadow: 3px 3px 2px 2px rgba(0, 0, 0, 0.1);
@@ -202,7 +200,6 @@ body {
 .main-footer {
 	margin-top: auto;
 	padding: 1rem;
-	background-color: var(--dark-mode__secondary);
 }
 
 .main-footer__socials {
@@ -218,7 +215,6 @@ body {
 
 .main-footer__social a {
 	text-decoration: none;
-	color: var(--light-mode__secondary);
 	transition: color 0.2s;
 }
 
