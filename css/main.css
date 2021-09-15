@@ -189,18 +189,16 @@ body {
 .cards {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, 17rem);
-	grid-template-rows: repeat(auto-fill, 25rem);
+	grid-template-rows: auto;
 	grid-gap: 4rem;
 	justify-content: center;
-	justify-items: center;
 	padding: 2.5rem;
 }
 
 .card {
-	display: inline-block;
-	height: 25rem;
-	width: 17rem;
+	width: 100%;
 	box-shadow: 3px 3px 2px 2px rgba(0, 0, 0, 0.1);
+	height: auto;
 }
 
 .card-image {
@@ -226,7 +224,7 @@ body {
 
 .card-info {
 	font-weight: 600;
-	margin: 0;
+	margin: 0 0 0.5rem 0;
 }
 
 .card-info span {

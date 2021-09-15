@@ -49,6 +49,17 @@ function newRenderedList(cards, country) {
 	capital.classList.add('card-info');
 	capital.innerHTML = `Capital: <span>${country.capital}</span>`;
 	cardData.append(capital);
+	toggleColor(card);
+}
+
+function toggleColor(card) {
+	if (toggleDarkMode.innerText === 'Light Mode') {
+		card.classList.remove('light-mode__secondary');
+		card.classList.add('dark-mode__secondary');
+	} else {
+		card.classList.remove('dark-mode__secondary');
+		card.classList.add('light-mode__secondary');
+	}
 }
 
 function dropdownCountriesList(countries) {
@@ -163,7 +174,7 @@ function borderCountries(data, infoDiv) {
 	border.insertAdjacentElement('beforeend', borderCountriesBtnContainer);
 	data.borders.map((border) => {
 		const borderCountriesBtn = document.createElement('button');
-		borderCountriesBtn.classList.add('border-countries__btn');
+		borderCountriesBtn.classList.add('border-countries__btn', 'dark-mode__secondary');
 		if (toggleDarkMode.innerText === 'Light Mode') {
 			borderCountriesBtn.classList.add('dark-mode__secondary');
 			borderCountriesBtn.classList.remove('light-mode__secondary');
@@ -209,7 +220,6 @@ function fetchSearchQuery(searchQuery) {
 }
 
 function searchQueryData(countries) {
-	console.log(countries);
 	const cards = document.createElement('section');
 	main.append(cards);
 	cards.classList.add('cards');
@@ -236,20 +246,45 @@ inputSearch.addEventListener('change', inputSearchHandler);
 toggleDarkMode.addEventListener('click', toggleDarkModeHandler);
 
 function toggleDarkModeHandler() {
+	const cards = Array.from(document.querySelectorAll('.card'));
+	const borderBtns = Array.from(document.querySelectorAll('.border-countries__btn'));
 	if (toggleDarkMode.innerText === 'Light Mode') {
 		toggleDarkMode.innerText = 'Dark Mode';
 		toggleIcon.classList.remove('fas', 'fa-moon');
 		toggleIcon.classList.add('far', 'fa-sun');
 		inputSearch.id = 'search-light__mode';
+		primaryElements.classList.remove('dark-mode__primary');
+		primaryElements.classList.add('light-mode__primary');
+		for (secondaryElement of secondaryElements) {
+			secondaryElement.classList.remove('dark-mode__secondary');
+			secondaryElement.classList.add('light-mode__secondary');
+		}
+		for (card of cards) {
+			card.classList.remove('dark-mode__secondary');
+			card.classList.add('light-mode__secondary');
+		}
+		for (borderBtn of borderBtns) {
+			borderBtn.classList.remove('dark-mode__secondary');
+			borderBtn.classList.add('light-mode__secondary');
+		}
 	} else {
 		toggleDarkMode.innerText = 'Light Mode';
 		toggleIcon.classList.remove('far', 'fa-sun');
 		toggleIcon.classList.add('fas', 'fa-moon');
 		inputSearch.id = 'search';
-	}
-	primaryElements.classList.toggle('light-mode__primary');
-
-	for (secondaryElement of secondaryElements) {
-		secondaryElement.classList.toggle('light-mode__secondary');
+		primaryElements.classList.remove('light-mode__primary');
+		primaryElements.classList.add('dark-mode__primary');
+		for (secondaryElement of secondaryElements) {
+			secondaryElement.classList.remove('light-mode__secondary');
+			secondaryElement.classList.add('dark-mode__secondary');
+		}
+		for (card of cards) {
+			card.classList.remove('light-mode__secondary');
+			card.classList.add('dark-mode__secondary');
+		}
+		for (borderBtn of borderBtns) {
+			borderBtn.classList.remove('light-mode__secondary');
+			borderBtn.classList.add('dark-mode__secondary');
+		}
 	}
 }
