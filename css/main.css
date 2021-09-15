@@ -10,15 +10,50 @@
 	--primary-font: 'Nunito Sans', sans-serif;
 }
 
+.dark-mode__primary {
+	background-color: var(--dark-mode__primary);
+	color: var(--light-mode__secondary);
+}
+
 .dark-mode__secondary {
 	background-color: var(--dark-mode__secondary);
 	color: var(--light-mode__secondary);
 }
 
+.light-mode__primary {
+	background-color: var(--light-mode__primary);
+	color: var(--light-mode__text);
+}
+
+#search-light__mode {
+	width: 20rem;
+	height: 2.5rem;
+	border-radius: 5px;
+	border: none;
+	font-size: 1rem;
+	padding-left: 3rem;
+	font-family: var(--primary-font);
+	font-weight: 300;
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+#search-light__mode::placeholder {
+	background-color: var(--light-mode__secondary);
+	color: var(--light-mode__input);
+	opacity: 80%;
+	font-family: var(--primary-font);
+	font-weight: 300;
+	vertical-align: middle;
+	font-size: 0.9em;
+}
+
+.light-mode__secondary {
+	background-color: var(--light-mode__secondary);
+	color: var(--light-mode__text);
+}
+
 body {
 	margin: 0;
-	background-color: var(--dark-mode__primary);
-	color: var(--light-mode__secondary);
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
@@ -106,6 +141,7 @@ body {
 }
 
 #search::placeholder {
+	background-color: var(--dark-mode__secondary);
 	color: var(--light-mode__secondary);
 	opacity: 80%;
 	font-family: var(--primary-font);
@@ -297,8 +333,6 @@ body {
 	border: 0;
 	padding: 0.5rem 1rem;
 	margin: 0.5rem;
-	background-color: var(--dark-mode__secondary);
-	color: var(--light-mode__secondary);
 	cursor: pointer;
 	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 }

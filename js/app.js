@@ -5,6 +5,10 @@ const cardTitles = document.querySelectorAll('.card-title');
 const inputSearch = document.querySelector('#search');
 const searchIcon = document.querySelector('.search-icon');
 const backBtn = document.querySelector('.back-btn');
+const toggleDarkMode = document.querySelector('#toggle-dark-mode');
+const toggleIcon = document.querySelector('#toggle-icon');
+const secondaryElements = document.querySelectorAll('.dark-mode__secondary');
+const primaryElements = document.querySelector('.dark-mode__primary');
 
 function fetchDropdownCountries(region) {
 	url = fetch(`https://restcountries.eu/rest/v2/region/${region}`)
@@ -160,6 +164,13 @@ function borderCountries(data, infoDiv) {
 	data.borders.map((border) => {
 		const borderCountriesBtn = document.createElement('button');
 		borderCountriesBtn.classList.add('border-countries__btn');
+		if (toggleDarkMode.innerText === 'Light Mode') {
+			borderCountriesBtn.classList.add('dark-mode__secondary');
+			borderCountriesBtn.classList.remove('light-mode__secondary');
+		} else if (toggleDarkMode.innerText === 'Dark Mode') {
+			borderCountriesBtn.classList.remove('dark-mode__secondary');
+			borderCountriesBtn.classList.add('light-mode__secondary');
+		}
 		url = fetch(`https://restcountries.eu/rest/v2/alpha/${border}`)
 			.then((response) => response.json())
 			.then((data) => {
@@ -209,9 +220,36 @@ function searchQueryData(countries) {
 
 function inputSearchHandler(e) {
 	const cards = document.querySelector('.cards');
-	cards.remove();
+	cards ? cards.remove() : null;
 	const searchQuery = e.target.value;
 	fetchSearchQuery(searchQuery);
 }
 
 inputSearch.addEventListener('change', inputSearchHandler);
+
+//
+//
+//
+//
+//
+
+toggleDarkMode.addEventListener('click', toggleDarkModeHandler);
+
+function toggleDarkModeHandler() {
+	if (toggleDarkMode.innerText === 'Light Mode') {
+		toggleDarkMode.innerText = 'Dark Mode';
+		toggleIcon.classList.remove('fas', 'fa-moon');
+		toggleIcon.classList.add('far', 'fa-sun');
+		inputSearch.id = 'search-light__mode';
+	} else {
+		toggleDarkMode.innerText = 'Light Mode';
+		toggleIcon.classList.remove('far', 'fa-sun');
+		toggleIcon.classList.add('fas', 'fa-moon');
+		inputSearch.id = 'search';
+	}
+	primaryElements.classList.toggle('light-mode__primary');
+
+	for (secondaryElement of secondaryElements) {
+		secondaryElement.classList.toggle('light-mode__secondary');
+	}
+}
