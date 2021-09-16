@@ -72,9 +72,11 @@ function dropdownCountriesList(countries) {
 }
 
 function regionFilterDropdownHandler(e) {
-	const cards = document.querySelector('.cards');
+	const error = document.querySelector('.error-msg__container');
+	error ? error.remove() : null;
 	inputSearch.value = '';
-	cards.remove();
+	const cards = document.querySelector('.cards');
+	cards ? cards.remove() : null;
 	const regionName = e.target.value;
 	optionOne.remove();
 	fetchDropdownCountries(regionName);
@@ -212,11 +214,25 @@ function cardTitleClickHandler(e) {
 cardTitle = Array.from(cardTitles);
 cardTitle.map((card) => card.addEventListener('click', cardTitleClickHandler));
 
+function inputSearchError(input) {
+	const errorMsgContainer = document.createElement('div');
+	errorMsgContainer.classList.add('error-msg__container');
+	main.append(errorMsgContainer);
+	const errorMsg = document.createElement('h2');
+	errorMsg.innerHTML = `Error! '${input}' does not exist! <i class="far fa-frown"></i>`;
+	errorMsgContainer.append(errorMsg);
+
+	inputSearch.value = '';
+}
+
 function fetchSearchQuery(searchQuery) {
 	url = fetch(`https://restcountries.eu/rest/v2/name/${searchQuery}`)
 		.then((response) => response.json())
 		.then((data) => searchQueryData(data))
-		.catch((e) => console.log(e));
+		.catch((e) => {
+			console.log(e);
+			inputSearchError(searchQuery);
+		});
 }
 
 function searchQueryData(countries) {
@@ -231,8 +247,12 @@ function searchQueryData(countries) {
 function inputSearchHandler(e) {
 	const cards = document.querySelector('.cards');
 	cards ? cards.remove() : null;
+	const error = document.querySelector('.error-msg__container');
+	error ? error.remove() : null;
 	const searchQuery = e.target.value;
 	fetchSearchQuery(searchQuery);
+	regionFilter.appendChild(optionOne);
+	regionFilter.value = 'Filter by Region';
 }
 
 inputSearch.addEventListener('change', inputSearchHandler);
