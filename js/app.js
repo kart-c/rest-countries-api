@@ -255,7 +255,7 @@ function inputSearchHandler(e) {
 	regionFilter.value = 'Filter by Region';
 }
 
-inputSearch.addEventListener('change', inputSearchHandler);s
+inputSearch.addEventListener('change', inputSearchHandler);
 
 toggleDarkMode.addEventListener('click', toggleDarkModeHandler);
 
