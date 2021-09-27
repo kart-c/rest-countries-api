@@ -11,13 +11,13 @@ const secondaryElements = document.querySelectorAll('.dark-mode__secondary');
 const primaryElements = document.querySelector('.dark-mode__primary');
 
 function fetchDropdownCountries(region) {
-	url = fetch(`https://restcountries.eu/rest/v2/region/${region}`)
+	url = fetch(`https://restcountries.com/v3/region/${region}`)
 		.then((response) => response.json())
 		.then((data) => dropdownCountriesList(data))
 		.catch((e) => console.log(e));
 }
 
-function newRenderedList(cards, country) {
+function newRenderedList(cards, country, countryName) {
 	const card = document.createElement('div');
 	card.classList.add('card', 'dark-mode__secondary');
 	card.setAttribute('id', country.alpha3Code);
@@ -26,7 +26,7 @@ function newRenderedList(cards, country) {
 	imageContainer.classList.add('card-image');
 	card.append(imageContainer);
 	const countryFlag = document.createElement('img');
-	countryFlag.src = country.flag;
+	countryFlag.src = country.flags[0];
 	countryFlag.alt = `${country.name} flag`;
 	imageContainer.append(countryFlag);
 	const cardData = document.createElement('div');
@@ -34,13 +34,9 @@ function newRenderedList(cards, country) {
 	card.append(cardData);
 	const cardTitle = document.createElement('p');
 	cardTitle.classList.add('card-title');
-	cardTitle.innerText = country.name;
+	cardTitle.innerText = countryName;
 	cardTitle.addEventListener('click', cardTitleClickHandler);
 	cardData.append(cardTitle);
-	const population = document.createElement('p');
-	population.classList.add('card-info');
-	population.innerHTML = `Population: <span>${country.population}</span>`;
-	cardData.append(population);
 	const region = document.createElement('p');
 	region.classList.add('card-info');
 	region.innerHTML = `Region: <span>${country.region}</span>`;
@@ -67,7 +63,8 @@ function dropdownCountriesList(countries) {
 	cards.classList.add('cards');
 	main.append(cards);
 	countries.map((country) => {
-		newRenderedList(cards, country);
+		const countryName = country.name.official;
+		newRenderedList(cards, country, countryName);
 	});
 }
 
@@ -100,9 +97,11 @@ backBtn.addEventListener('click', backBtnClickHandler);
 function fetchCountryInfo(name) {
 	const container = document.querySelector('.country-info__container');
 	container ? container.remove() : null;
-	url = fetch(`https://restcountries.eu/rest/v2/name/${name}?fullText=true`)
+	url = fetch(`https://restcountries.com/v2/name/${name}?fullText=true`)
 		.then((response) => response.json())
-		.then((data) => countryInfo(data[0]))
+		.then((data) => {
+			countryInfo(data[0]);
+		})
 		.catch((e) => console.log(e));
 }
 
@@ -111,7 +110,7 @@ function countryInfo(data) {
 	container.classList.add('country-info__container');
 	main.append(container);
 	const countryFlag = document.createElement('img');
-	countryFlag.src = data.flag;
+	countryFlag.src = data.flags[0];
 	countryFlag.alt = `${data.name} flag`;
 	countryFlag.classList.add('country-info__flag');
 	container.append(countryFlag);
@@ -155,10 +154,6 @@ function countryInfo(data) {
 		(language) => language.name
 	)}</span>`;
 	infoDiv.append(countryLanguages);
-	const countrySubRegion = document.createElement('p');
-	countrySubRegion.classList.add('card-info');
-	countrySubRegion.innerHTML = `Sub Region: <span>${data.subregion}</span>`;
-	infoDiv.append(countrySubRegion);
 	const countryCapital = document.createElement('p');
 	countryCapital.classList.add('card-info');
 	countryCapital.innerHTML = `Capital: <span>${data.capital}</span>`;
@@ -168,7 +163,7 @@ function countryInfo(data) {
 
 function borderCountries(data, infoDiv) {
 	const border = document.createElement('p');
-	border.innerText = 'Border Countries: ';
+	border.innerText = 'Border Countries : ';
 	infoDiv.append(border);
 	border.classList.add('card-info');
 	const borderCountriesBtnContainer = document.createElement('div');
@@ -184,7 +179,7 @@ function borderCountries(data, infoDiv) {
 			borderCountriesBtn.classList.remove('dark-mode__secondary');
 			borderCountriesBtn.classList.add('light-mode__secondary');
 		}
-		url = fetch(`https://restcountries.eu/rest/v2/alpha/${border}`)
+		url = fetch(`https://restcountries.com/v2/alpha/${border}`)
 			.then((response) => response.json())
 			.then((data) => {
 				borderCountriesBtn.innerText = data.name;
@@ -226,7 +221,7 @@ function inputSearchError(input) {
 }
 
 function fetchSearchQuery(searchQuery) {
-	url = fetch(`https://restcountries.eu/rest/v2/name/${searchQuery}`)
+	url = fetch(`https://restcountries.com/v2/name/${searchQuery}`)
 		.then((response) => response.json())
 		.then((data) => searchQueryData(data))
 		.catch((e) => {
@@ -240,7 +235,8 @@ function searchQueryData(countries) {
 	main.append(cards);
 	cards.classList.add('cards');
 	countries.map((country) => {
-		newRenderedList(cards, country);
+		const countryName = country.name;
+		newRenderedList(cards, country, countryName);
 	});
 }
 
