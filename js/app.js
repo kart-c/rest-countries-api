@@ -17,7 +17,7 @@ function fetchDropdownCountries(region) {
 		.catch((e) => console.log(e));
 }
 
-function newRenderedList(cards, country, countryName) {
+function newRenderedList(cards, country, countryName, flag) {
 	const card = document.createElement('div');
 	card.classList.add('card', 'dark-mode__secondary');
 	card.setAttribute('id', country.alpha3Code);
@@ -26,7 +26,7 @@ function newRenderedList(cards, country, countryName) {
 	imageContainer.classList.add('card-image');
 	card.append(imageContainer);
 	const countryFlag = document.createElement('img');
-	countryFlag.src = country.flags[0];
+	countryFlag.src = flag;
 	countryFlag.alt = `${country.name} flag`;
 	imageContainer.append(countryFlag);
 	const cardData = document.createElement('div');
@@ -64,7 +64,8 @@ function dropdownCountriesList(countries) {
 	main.append(cards);
 	countries.map((country) => {
 		const countryName = country.name.official;
-		newRenderedList(cards, country, countryName);
+		const flag = country.flags[1];
+		newRenderedList(cards, country, countryName, flag);
 	});
 }
 
@@ -110,7 +111,7 @@ function countryInfo(data) {
 	container.classList.add('country-info__container');
 	main.append(container);
 	const countryFlag = document.createElement('img');
-	countryFlag.src = data.flags[0];
+	countryFlag.src = data.flags.svg;
 	countryFlag.alt = `${data.name} flag`;
 	countryFlag.classList.add('country-info__flag');
 	container.append(countryFlag);
@@ -236,7 +237,8 @@ function searchQueryData(countries) {
 	cards.classList.add('cards');
 	countries.map((country) => {
 		const countryName = country.name;
-		newRenderedList(cards, country, countryName);
+		const flag = country.flags.svg;
+		newRenderedList(cards, country, countryName, flag);
 	});
 }
 
